@@ -56,10 +56,17 @@ Bu yöntem sayesinde:
 
 ## 🚀 Projenin Çalıştırılması
 
-Projeyi yerel ortamda çalıştırmak için:
+Projeyi yerel ortamda çalıştırmak için aşağıdaki komutları sırasıyla uygulayın:
+
+```bash
+# Bağımlılıkları yükle
 npm install
+
+# Projeyi geliştirme modunda çalıştır
 npm run dev
-Uygulama varsayılan olarak şu adreste çalışacaktır:http://localhost:5173
+```
+
+Uygulama varsayılan olarak şu adreste çalışacaktır: [http://localhost:5173](http://localhost:5173)
 
 ---
 
