@@ -3,8 +3,10 @@
   line-height: 1.6;
   font-weight: 400;
 
-  color: #f3f4f6;
-  background-color: #111827;
+  color: #2d3e50;
+  /* Dark navy gray */
+  background-color: #ffffff;
+  /* Solid white */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,7 +18,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #111827;
+  background-color: #ffffff;
   overflow-x: hidden;
 }
 
@@ -24,8 +26,11 @@ h1,
 h2,
 h3 {
   margin: 0;
-  color: #ffffff;
+  color: #1a2a3a;
+  /* Navy blue */
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 * {
