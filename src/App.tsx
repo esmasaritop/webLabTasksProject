@@ -151,12 +151,56 @@ function App() {
           </div>
         </section>
 
-        <section id="iletisim">
-          <h2>İLETİŞİM </h2>
-          <p className="content-placeholder">
-            Benimle iletişime geçmek için esma.saritop@example.com adresini kullanabilir veya
-            sosyal medya üzerinden ulaşabilirsiniz.
-          </p>
+        <section id="iletisim" aria-labelledby="iletisim-baslik">
+          <h2 id="iletisim-baslik">İRTİBATA GEÇ</h2>
+
+          <div className="contact-layout">
+            <div className="contact-info">
+              <h3>İLETİŞİM!</h3>
+              <p>
+                Yeni bir proje, bir iş birliği fırsatı veya sadece teknoloji üzerine
+                sohbet etmek için aşağıdan bana ulaşabilirsiniz. İnovatif fikirlere
+                ve zorlayıcı projelere her zaman açığım.
+              </p>
+
+              <div className="contact-details">
+                <div className="contact-item">
+                  <span className="contact-icon">📍</span>
+                  <div>
+                    <strong>ADRES</strong>
+                    <p>Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği Bölümü <br /> Elazığ/Merkez</p>
+                  </div>
+                </div>
+
+                <div className="contact-item">
+                  <span className="contact-icon">📧</span>
+                  <div>
+                    <strong>EMAIL</strong>
+                    <p>esmasaritop@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="social-links">
+                <a href="https://www.linkedin.com/in/esmasaritop/" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">LinkedIn</a>
+                <a href="https://github.com/esmasaritop" target="_blank" rel="noopener noreferrer" className="social-icon github">GitHub</a>
+              </div>
+            </div>
+
+            <div className="contact-form-container">
+              <form className="contact-form">
+                <div className="form-row">
+                  <input type="text" placeholder="Adınız ve Soyadınız" required />
+                  <input type="email" placeholder="Mail Adresiniz" required />
+                </div>
+                <input type="text" placeholder="Konu" required />
+                <textarea placeholder="Mesajınız" rows={6} required></textarea>
+                <button type="submit" className="submit-btn">
+                  MESAJ GÖNDER <span className="btn-arrow">→</span>
+                </button>
+              </form>
+            </div>
+          </div>
         </section>
       </main>
 
