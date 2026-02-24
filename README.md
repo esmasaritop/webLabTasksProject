@@ -1,16 +1,87 @@
-# React + Vite
+# 📘 Web Programlama Dersi  
+## Dönem Boyunca Haftalık Görev Uygulama Projesi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 📌 Proje Hakkında
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bu proje, Web Programlama dersi kapsamında bir dönem boyunca verilecek haftalık görevlerin (tasks) uygulanması amacıyla oluşturulmuştur.
 
-## React Compiler
+Proje altyapısı modern frontend geliştirme standartlarına uygun olarak **React** ve **Vite** teknolojileri kullanılarak hazırlanmıştır.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Ders süresince her hafta verilen görev, ayrı bir Git branch’i üzerinde geliştirilerek versiyon kontrolü sağlanacaktır. Bu sayede yazılım geliştirme süreci sistematik biçimde takip edilecek ve haftalık ilerleme düzenli olarak kayıt altına alınacaktır.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Kullanılan Teknolojiler
+
+- React  
+- Vite  
+- JavaScript (ES6+)  
+- CSS  
+- ESLint  
+
+---
+
+## 🌿 Branch Yönetim Stratejisi
+
+Projenin ana dalı: main
+
+
+Her haftalık görev için ayrı bir branch oluşturulacaktır:
+week-1-task
+week-2-task
+week-3-task
+...
+
+### Branch Oluşturma
+git checkout -b week-1-task
+
+Görev tamamlandıktan sonra:
+git add .
+git commit -m "Week 1 task completed"
+git push origin week-1-task
+
+Bu yöntem sayesinde:
+
+- Haftalık çalışmalar birbirinden bağımsız tutulur.
+- Gelişim süreci geriye dönük incelenebilir.
+- Kod yönetimi düzenli ve sürdürülebilir hale gelir.
+
+---
+
+## 🚀 Projenin Çalıştırılması
+
+Projeyi yerel ortamda çalıştırmak için:
+npm install
+npm run dev
+Uygulama varsayılan olarak şu adreste çalışacaktır:http://localhost:5173
+
+---
+
+## 🎯 Projenin Amaçları
+
+Bu proje kapsamında:
+
+- React bileşen yapısının öğrenilmesi  
+- State ve Props kavramlarının uygulanması  
+- Event yönetimi ve form işlemlerinin geliştirilmesi  
+- Routing yapısının kurulması  
+- API entegrasyonlarının gerçekleştirilmesi  
+- Git branch yönetimi pratiğinin kazanılması  
+- Versiyon kontrol disiplininin geliştirilmesi  
+
+amaçlanmaktadır.
+
+---
+
+## 📈 Dönem Sonu Hedefi
+
+Dönem sonunda proje;
+
+- Modüler bir yapıya sahip,  
+- Versiyon kontrolü düzenli yürütülmüş,  
+- Haftalık gelişimi izlenebilir,  
+- Modern frontend geliştirme prensiplerine uygun  
+
+bir uygulama haline getirilmiş olacaktır.
