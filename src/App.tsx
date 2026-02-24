@@ -6,6 +6,7 @@ import './App.css'
 function App() {
   return (
     <div className="app-container">
+      <a href="#main-content" className="skip-link">İçeriğe Atla</a>
       {/*
       <div className="top-bar">
         <div className="top-bar-content">
@@ -32,7 +33,7 @@ function App() {
         </div>
       </header>
 
-      <main>
+      <main id="main-content">
         <section id="hakkimda" aria-labelledby="hakkimda-baslik">
           <div className="hakkimda-layout">
             <div className="hakkimda-photo">
@@ -80,7 +81,7 @@ function App() {
         <section id="projeler" aria-labelledby="projeler-baslik">
           <h2 id="projeler-baslik">PROJELERİM</h2>
           <div className="project-grid">
-            <article className="project-card">
+            <article className="project-card" tabIndex={0}>
               <div className="project-image-container">
                 <img src="/photos/enstitu.png" alt="LBYS Proje Görseli" className="project-img" />
               </div>
@@ -91,7 +92,7 @@ function App() {
               </p>
             </article>
 
-            <article className="project-card">
+            <article className="project-card" tabIndex={0}>
               <div className="project-image-container">
                 <img src="/photos/erasmus.png" alt="ErasmusGate Proje Görseli" className="project-img" />
               </div>
@@ -104,7 +105,7 @@ function App() {
             </article>
 
 
-            <article className="project-card">
+            <article className="project-card" tabIndex={0}>
               <div className="project-image-container">
                 <img src="/photos/quicklit.png" alt="QuickLit Proje Görseli" className="project-img" />
               </div>
@@ -115,7 +116,7 @@ function App() {
               </p>
             </article>
 
-            <article className="project-card">
+            <article className="project-card" tabIndex={0}>
               <div className="project-image-container">
                 <img src="/photos/atanma.png" alt="Atanma Sistemi Proje Görseli" className="project-img" />
               </div>
@@ -127,7 +128,7 @@ function App() {
               </p>
             </article>
 
-            <article className="project-card">
+            <article className="project-card" tabIndex={0}>
               <div className="project-image-container">
                 <img src="/photos/isaccl.png" alt="Isaccl Proje Görseli" className="project-img" />
               </div>
@@ -138,7 +139,7 @@ function App() {
               </p>
             </article>
 
-            <article className="project-card">
+            <article className="project-card" tabIndex={0}>
               <div className="project-image-container">
                 <img src="/photos/cybercortx.png" alt="CyberCortex Proje Görseli" className="project-img" />
               </div>
