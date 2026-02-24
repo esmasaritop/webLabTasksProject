@@ -10,6 +10,10 @@ Bu proje, Web Programlama dersi kapsamında bir dönem boyunca verilecek haftal�
 Proje altyapısı modern frontend geliştirme standartlarına uygun olarak **React** ve **Vite** teknolojileri kullanılarak hazırlanmıştır.
 
 Ders süresince her hafta verilen görev, ayrı bir Git branch’i üzerinde geliştirilerek versiyon kontrolü sağlanacaktır. Bu sayede yazılım geliştirme süreci sistematik biçimde takip edilecek ve haftalık ilerleme düzenli olarak kayıt altına alınacaktır.
+---
+## Gelistirici
+**Ad Soyad:** ESMA SARITOP
+**Ogrenci No:** 230541100
 
 ---
 
@@ -85,3 +89,10 @@ Dönem sonunda proje;
 - Modern frontend geliştirme prensiplerine uygun  
 
 bir uygulama haline getirilmiş olacaktır.
+
+---
+## Gelistirici
+**Ad Soyad:** ESMA SARITOP
+**Ogrenci No:** 230541100
+
+---

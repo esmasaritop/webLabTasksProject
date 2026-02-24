@@ -4,13 +4,27 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-
   return (
-    <div>
-      <h1>Web Tasarımı ve Programlama </h1>
-      <h2>LAB -1</h2>
-      <p>Ad Soyad: [ESMA SARITOP]</p>
-      <p>Ogrenci No: [230541100]</p>
+    <div className="app-container">
+      <div className="bg-shape shape-1"></div>
+      <div className="bg-shape shape-2"></div>
+
+      <div className="glass-card">
+        <h1>Web Tasarımı ve Programlama</h1>
+        <h2>LAB - 1</h2>
+
+        <div className="info-group">
+          <div>
+            <span className="info-label">Ad Soyad</span>
+            <span className="info-value">ESMA SARITOP</span>
+          </div>
+
+          <div>
+            <span className="info-label">Öğrenci No</span>
+            <span className="info-value">230541100</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
