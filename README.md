@@ -103,7 +103,8 @@ bir uygulama haline getirilmiş olacaktır.
 **Ogrenci No:** 230541100
 
 ---
-#LİGHTHOUSETEST
+##LİGHTHOUSETEST
+
 <img width="777" height="389" alt="lighthouseTest" src="https://github.com/user-attachments/assets/46da6e62-ff7a-4304-be21-124937891c77" />
 ---
 
