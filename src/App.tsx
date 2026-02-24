@@ -2,20 +2,77 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Swal from 'sweetalert2'
 
 function App() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const fullName = formData.get('full-name') as string;
+    const email = formData.get('email') as string;
+    const subject = formData.get('subject') as string;
+
+    if (!email) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Eksik Bilgi',
+        text: 'Mail adresi girmediniz',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Geçersiz Format',
+        text: 'Lütfen geçerli bir mail adresi giriniz',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
+
+    if (fullName.length < 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Geçersiz İsim',
+        text: 'Adınız ve soyadınız en az 3 karakter olmalıdır',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
+
+    if (subject.length < 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Geçersiz Konu',
+        text: 'Konu en az 3 karakter olmalıdır',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Başarılı!',
+      text: 'Mesajınız başarıyla gönderildi!',
+      confirmButtonColor: '#28a745',
+    });
+  };
+
   return (
     <div className="app-container">
       <a href="#main-content" className="skip-link">İçeriğe Atla</a>
       {/*
-      <div className="top-bar">
-        <div className="top-bar-content">
-          <span><i className="phone-icon"></i> +90 544 773 33 74 </span>
-          <span><i className="email-icon"></i> esmasaritop@gmail.com</span>
-          <span><i className="location-icon"></i> Elazığ, Türkiye</span>
+        <div className="top-bar">
+          <div className="top-bar-content">
+            <span><i className="phone-icon"></i> +90 544 773 33 74 </span>
+            <span><i className="email-icon"></i> esmasaritop@gmail.com</span>
+            <span><i className="location-icon"></i> Elazığ, Türkiye</span>
+          </div>
         </div>
-      </div>
-      */}
+        */}
 
       <header>
         <div className="header-content">
@@ -189,27 +246,27 @@ function App() {
             </div>
 
             <div className="contact-form-container">
-              <form className="contact-form" noValidate>
+              <form className="contact-form" noValidate onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="full-name" className="sr-only">Adınız ve Soyadınız</label>
-                    <input type="text" id="full-name" placeholder="Adınız ve Soyadınız" required minLength={3} />
+                    <input type="text" id="full-name" name="full-name" placeholder="Adınız ve Soyadınız" required minLength={3} />
                     <small className="error-message" role="alert"></small>
                   </div>
                   <div className="form-group">
                     <label htmlFor="email" className="sr-only">Mail Adresiniz</label>
-                    <input type="email" id="email" placeholder="Mail Adresiniz" required />
+                    <input type="email" id="email" name="email" placeholder="Mail Adresiniz" required />
                     <small className="error-message" role="alert"></small>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="subject" className="sr-only">Konu</label>
-                  <input type="text" id="subject" placeholder="Konu" required minLength={5} />
+                  <input type="text" id="subject" name="subject" placeholder="Konu" required minLength={3} />
                   <small className="error-message" role="alert"></small>
                 </div>
                 <div className="form-group">
                   <label htmlFor="message" className="sr-only">Mesajınız</label>
-                  <textarea id="message" placeholder="Mesajınız" rows={6} required minLength={10}></textarea>
+                  <textarea id="message" name="message" placeholder="Mesajınız" rows={6} required minLength={10}></textarea>
                   <small className="error-message" role="alert"></small>
                 </div>
                 <button type="submit" className="submit-btn">
@@ -224,7 +281,7 @@ function App() {
       <footer>
         <p>&copy; 2025 ESMA SARITOP. Tüm hakları saklıdır.</p>
       </footer>
-    </div>
+    </div >
   )
 }
 
