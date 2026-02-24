@@ -4,6 +4,32 @@
   background-color: #ffffff;
 }
 
+/* Accessibility Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.75rem;
+  min-height: 1rem;
+}
+
 /* Skip Link */
 .skip-link {
   position: absolute;

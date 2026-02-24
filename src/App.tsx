@@ -20,7 +20,7 @@ function App() {
       <header>
         <div className="header-content">
           <div className="logo">
-            <span className="logo-icon">🏛️</span>
+            <span className="logo-icon" aria-hidden="true">🏛️</span>
             <h1>ESMA SARITOP</h1>
           </div>
           <nav>
@@ -189,13 +189,29 @@ function App() {
             </div>
 
             <div className="contact-form-container">
-              <form className="contact-form">
+              <form className="contact-form" noValidate>
                 <div className="form-row">
-                  <input type="text" placeholder="Adınız ve Soyadınız" required />
-                  <input type="email" placeholder="Mail Adresiniz" required />
+                  <div className="form-group">
+                    <label htmlFor="full-name" className="sr-only">Adınız ve Soyadınız</label>
+                    <input type="text" id="full-name" placeholder="Adınız ve Soyadınız" required minLength={3} />
+                    <small className="error-message" role="alert"></small>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email" className="sr-only">Mail Adresiniz</label>
+                    <input type="email" id="email" placeholder="Mail Adresiniz" required />
+                    <small className="error-message" role="alert"></small>
+                  </div>
                 </div>
-                <input type="text" placeholder="Konu" required />
-                <textarea placeholder="Mesajınız" rows={6} required></textarea>
+                <div className="form-group">
+                  <label htmlFor="subject" className="sr-only">Konu</label>
+                  <input type="text" id="subject" placeholder="Konu" required minLength={5} />
+                  <small className="error-message" role="alert"></small>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message" className="sr-only">Mesajınız</label>
+                  <textarea id="message" placeholder="Mesajınız" rows={6} required minLength={10}></textarea>
+                  <small className="error-message" role="alert"></small>
+                </div>
                 <button type="submit" className="submit-btn">
                   MESAJ GÖNDER <span className="btn-arrow">→</span>
                 </button>
