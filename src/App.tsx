@@ -139,7 +139,7 @@ function App() {
 
           <article aria-labelledby="teknolojiler-baslik">
             <h3 id="teknolojiler-baslik">Kullandığım Teknolojiler</h3>
-            <ul className="tech-tags">
+            <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
               <li>HTML5</li><li>CSS3</li><li>Bootstrap</li><li>JavaScript</li><li>Laravel</li>
               <li>React</li><li>Web Services & API</li><li>C#</li><li>MySQL</li><li>PostgreSQL</li>
               <li>jQuery</li><li>AJAX</li>
