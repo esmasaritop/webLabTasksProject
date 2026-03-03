@@ -98,6 +98,14 @@ Dönem sonunda proje;
 bir uygulama haline getirilmiş olacaktır.
 
 ---
+
+## 🖥 Ekran Görüntüleri
+
+| Hakkımda Bölümü | Projelerim Bölümü | İletişim Bölümü |
+|---|---|---|
+| ![Hakkımda](screenshots/screenshot-desktop-hakkimda.png) | ![Projelerim](screenshots/screenshot-desktop-projeler.png) | ![İletişim](screenshots/screenshot-desktop-iletisim.png) |
+
+---
 ## Gelistirici
 **Ad Soyad:** ESMA SARITOP
 **Ogrenci No:** 230541100
