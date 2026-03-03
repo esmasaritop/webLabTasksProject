@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Swal from 'sweetalert2'
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -80,11 +82,21 @@ function App() {
             <span className="logo-icon" aria-hidden="true">🏛️</span>
             <h1>ESMA SARITOP</h1>
           </div>
-          <nav>
+          <button
+            className={`hamburger${menuOpen ? ' open' : ''}`}
+            aria-label="Menüyü aç/kapat"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav className={menuOpen ? 'nav-open' : ''}>
             <ul>
-              <li><a href="#hakkimda">HAKKIMIZDA</a></li>
-              <li><a href="#projeler">PROJELERİM</a></li>
-              <li><a href="#iletisim">İLETİŞİM</a></li>
+              <li><a href="#hakkimda" onClick={closeMenu}>HAKKIMIZDA</a></li>
+              <li><a href="#projeler" onClick={closeMenu}>PROJELERİM</a></li>
+              <li><a href="#iletisim" onClick={closeMenu}>İLETİŞİM</a></li>
             </ul>
           </nav>
         </div>
@@ -127,7 +139,7 @@ function App() {
 
           <article aria-labelledby="teknolojiler-baslik">
             <h3 id="teknolojiler-baslik">Kullandığım Teknolojiler</h3>
-            <ul className="tech-tags">
+            <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
               <li>HTML5</li><li>CSS3</li><li>Bootstrap</li><li>JavaScript</li><li>Laravel</li>
               <li>React</li><li>Web Services & API</li><li>C#</li><li>MySQL</li><li>PostgreSQL</li>
               <li>jQuery</li><li>AJAX</li>
