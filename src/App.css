@@ -357,6 +357,42 @@ section h2::after {
   border-radius: 50%;
 }
 
+/* Hamburger Button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 200;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #1a2a3a;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 @media (max-width: 992px) {
   .contact-layout {
     flex-direction: column;
@@ -369,6 +405,203 @@ section h2::after {
 
   .form-row {
     flex-direction: column;
+  }
+}
+
+/* ========================
+   TABLET (max 768px)
+======================== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 2rem;
+  }
+
+  nav.nav-open {
+    max-height: 300px;
+    padding: 1.5rem 2rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  nav a {
+    font-size: 1rem;
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  .header-content {
+    position: relative;
+  }
+
+  header {
+    padding: 1rem 0;
+  }
+
+  .logo h1 {
+    font-size: 1.1rem;
+  }
+
+  main {
+    margin: 2.5rem auto;
+    gap: 4rem;
+    padding: 0 1.25rem;
+  }
+
+  section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Hakkımda */
+  .hakkimda-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .hakkimda-photo {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hakkimda-info h2 {
+    text-align: center;
+  }
+
+  .hakkimda-info h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Projects */
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  /* Contact */
+  .contact-layout {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .contact-info {
+    flex: 0 0 auto;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tech-tags {
+    gap: 0.6rem;
+  }
+
+  footer {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+/* ========================
+   MOBILE (max 480px)
+======================== */
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+
+  .logo-icon {
+    font-size: 1.2rem;
+  }
+
+  main {
+    padding: 0 1rem;
+    margin: 2rem auto;
+    gap: 3.5rem;
+  }
+
+  section h2 {
+    font-size: 1.35rem;
+  }
+
+  .hakkimda-photo {
+    max-width: 260px;
+  }
+
+  .hakkimda-info p {
+    font-size: 0.9rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .project-card h3 {
+    font-size: 1rem;
+  }
+
+  .contact-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .contact-info p {
+    font-size: 0.9rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.875rem;
+  }
+
+  .submit-btn {
+    padding: 1rem 1.75rem;
+    font-size: 0.9rem;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+
+  .social-icon {
+    font-size: 0.75rem;
+    padding: 0.55rem 1rem;
+  }
+
+  footer {
+    padding: 2rem 1rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
   }
 }
 

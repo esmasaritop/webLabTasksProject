@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Swal from 'sweetalert2'
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -80,11 +82,21 @@ function App() {
             <span className="logo-icon" aria-hidden="true">🏛️</span>
             <h1>ESMA SARITOP</h1>
           </div>
-          <nav>
+          <button
+            className={`hamburger${menuOpen ? ' open' : ''}`}
+            aria-label="Menüyü aç/kapat"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav className={menuOpen ? 'nav-open' : ''}>
             <ul>
-              <li><a href="#hakkimda">HAKKIMIZDA</a></li>
-              <li><a href="#projeler">PROJELERİM</a></li>
-              <li><a href="#iletisim">İLETİŞİM</a></li>
+              <li><a href="#hakkimda" onClick={closeMenu}>HAKKIMIZDA</a></li>
+              <li><a href="#projeler" onClick={closeMenu}>PROJELERİM</a></li>
+              <li><a href="#iletisim" onClick={closeMenu}>İLETİŞİM</a></li>
             </ul>
           </nav>
         </div>
