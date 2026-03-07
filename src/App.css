@@ -64,7 +64,8 @@ header {
 }
 
 .logo-icon {
-  font-size: 1.3rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .logo h1 {
@@ -154,6 +155,32 @@ nav a:focus {
   color: var(--color-accent);
 }
 
+/* ===== HEADER SOSYAL İKONLAR ===== */
+.header-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-shrink: 0;
+}
+
+.header-social a {
+  color: var(--color-primary);
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.header-social a:hover,
+.header-social a:focus {
+  color: var(--color-accent);
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.header-social a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 /* ===== MAIN ===== */
 main {
   padding: var(--space-xl) var(--space-md);
@@ -215,10 +242,17 @@ section h2::after {
   margin-bottom: var(--space-xl);
 }
 
-.hakkimda-info h3 {
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-sm);
+/* Hakkımda bölümündeki tüm h3 başlıkları — tutarlı stil */
+#hakkimda h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
   color: var(--color-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-bottom: var(--space-sm);
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 .hakkimda-info p {
@@ -227,14 +261,129 @@ section h2::after {
   font-size: var(--text-base);
 }
 
+/* ===== TIMELINE ===== */
+.timeline-article {
+  margin-top: var(--space-3xl);
+}
+
+.timeline-article h3 {
+  margin-bottom: var(--space-xl);
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+/* Dikey çizgi */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent), var(--color-primary));
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+  padding-bottom: var(--space-2xl);
+  position: relative;
+  padding-left: var(--space-3xl);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Yol üzerindeki nokta */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg);
+  border: 3px solid var(--color-primary);
+  z-index: 1;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.timeline-item--active::before {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.timeline-item:hover::before {
+  border-color: var(--color-accent);
+}
+
+.timeline-date {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+  padding-top: 0.15rem;
+  min-width: 170px;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-content strong {
+  display: block;
+  font-size: var(--text-base);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-org {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  opacity: 0.85;
+}
+
+.timeline-content p {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 639px) {
+  .timeline-item {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .timeline-date {
+    min-width: unset;
+  }
+}
+
 /* ===== SKILL TAGS — Flexbox toolbar ===== */
+#hakkimda > article:last-of-type {
+  margin-top: var(--space-3xl);
+}
+
 .skill-tags {
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-top: var(--space-xl);
+  margin-top: var(--space-lg);
   justify-content: center;
 }
 

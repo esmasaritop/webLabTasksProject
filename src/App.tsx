@@ -1,66 +1,82 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { Code2, Github, Linkedin } from 'lucide-react'
 import './App.css'
 import Swal from 'sweetalert2'
+import ReCAPTCHA from 'react-google-recaptcha'
+
+const WEB3FORMS_KEY      = 'c2f628b8-e12b-4131-bfc3-06aafff45961'
+const RECAPTCHA_SITE_KEY = '6Lcw3YIsAAAAAIg5tIYDSjfag1G9aH7lA8-o73JP'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const closeMenu = () => setMenuOpen(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const fullName = formData.get('full-name') as string;
-    const email = formData.get('email') as string;
-    const subject = formData.get('subject') as string;
+    const email    = formData.get('email') as string;
+    const subject  = formData.get('subject') as string;
+    const message  = formData.get('message') as string;
 
     if (!email) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Eksik Bilgi',
-        text: 'Mail adresi girmediniz',
-        confirmButtonColor: '#3085d6',
-      });
+      Swal.fire({ icon: 'warning', title: 'Eksik Bilgi', text: 'Mail adresi girmediniz', confirmButtonColor: '#1a2a3a' });
       return;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Geçersiz Format',
-        text: 'Lütfen geçerli bir mail adresi giriniz',
-        confirmButtonColor: '#3085d6',
-      });
+      Swal.fire({ icon: 'warning', title: 'Geçersiz Format', text: 'Lütfen geçerli bir mail adresi giriniz', confirmButtonColor: '#1a2a3a' });
       return;
     }
-
     if (fullName.length < 3) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Geçersiz İsim',
-        text: 'Adınız ve soyadınız en az 3 karakter olmalıdır',
-        confirmButtonColor: '#3085d6',
-      });
+      Swal.fire({ icon: 'warning', title: 'Geçersiz İsim', text: 'Adınız ve soyadınız en az 3 karakter olmalıdır', confirmButtonColor: '#1a2a3a' });
       return;
     }
-
     if (subject.length < 3) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Geçersiz Konu',
-        text: 'Konu en az 3 karakter olmalıdır',
-        confirmButtonColor: '#3085d6',
-      });
+      Swal.fire({ icon: 'warning', title: 'Geçersiz Konu', text: 'Konu en az 3 karakter olmalıdır', confirmButtonColor: '#1a2a3a' });
+      return;
+    }
+    if (message.length < 10) {
+      Swal.fire({ icon: 'warning', title: 'Eksik Mesaj', text: 'Mesajınız en az 10 karakter olmalıdır', confirmButtonColor: '#1a2a3a' });
       return;
     }
 
-    Swal.fire({
-      icon: 'success',
-      title: 'Başarılı!',
-      text: 'Mesajınız başarıyla gönderildi!',
-      confirmButtonColor: '#28a745',
-    });
+    const captchaToken = recaptchaRef.current?.getValue();
+    if (!captchaToken) {
+      Swal.fire({ icon: 'warning', title: 'Doğrulama Gerekli', text: 'Lütfen robot olmadığınızı doğrulayın', confirmButtonColor: '#1a2a3a' });
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: fullName,
+          email,
+          subject,
+          message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        Swal.fire({ icon: 'success', title: 'Gönderildi!', text: 'Mesajınız başarıyla iletildi, en kısa sürede dönüş yapacağım.', confirmButtonColor: '#28a745' });
+        formRef.current?.reset();
+        recaptchaRef.current?.reset();
+      } else {
+        throw new Error(data.message);
+      }
+    } catch {
+      Swal.fire({ icon: 'error', title: 'Hata!', text: 'Mesaj gönderilemedi, lütfen tekrar deneyin.', confirmButtonColor: '#1a2a3a' });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -79,7 +95,7 @@ function App() {
       <header>
         <div className="header-content">
           <div className="logo">
-            <span className="logo-icon" aria-hidden="true">🏛️</span>
+            <Code2 className="logo-icon" size={28} strokeWidth={2} aria-hidden="true" />
             <h1>ESMA SARITOP</h1>
           </div>
           <button
@@ -99,6 +115,14 @@ function App() {
               <li><a href="#iletisim" onClick={closeMenu}>İLETİŞİM</a></li>
             </ul>
           </nav>
+          <div className="header-social">
+            <a href="https://github.com/esmasaritop" target="_blank" rel="noopener noreferrer" aria-label="GitHub profilim">
+              <Github size={22} strokeWidth={2} />
+            </a>
+            <a href="https://www.linkedin.com/in/esmasaritop/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profilim">
+              <Linkedin size={22} strokeWidth={2} />
+            </a>
+          </div>
         </div>
       </header>
 
@@ -137,12 +161,59 @@ function App() {
             </div>
           </div>
 
+        
+          <article aria-labelledby="timeline-baslik" className="timeline-article">
+            <h3 id="timeline-baslik">Tecrübe ve Eğitim</h3>
+            <ol className="timeline" role="list">
+              <li className="timeline-item">
+                <div className="timeline-date">Eylül 2021 – Halen</div>
+                <div className="timeline-content">
+                  <strong>Yazılım Mühendisliği Öğrencisi</strong>
+                  <span className="timeline-org">Fırat Üniversitesi, Teknoloji Fakültesi</span>
+                  <p>Yazılım mühendisliği alanında lisans eğitimim devam etmektedir.</p>
+                </div>
+              </li>
+              <li className="timeline-item">
+                <div className="timeline-date">Ocak 2023 – Haziran 2023</div>
+                <div className="timeline-content">
+                  <strong>Code23 Eğitim Programı</strong>
+                  <span className="timeline-org">Code23</span>
+                  <p>Yazılım geliştirme becerilerimi pekiştiren yoğun eğitim programını tamamladım.</p>
+                </div>
+              </li>
+              <li className="timeline-item">
+                <div className="timeline-date">Ekim 2023 – Ekim 2024</div>
+                <div className="timeline-content">
+                  <strong>Yazılım Geliştirici</strong>
+                  <span className="timeline-org">Fırat Üniversitesi Dijital Dönüşüm ve Yazılım Ofisi</span>
+                  <p>Üniversite bünyesindeki gerçek hayat projelerinde aktif rol aldım.</p>
+                </div>
+              </li>
+              <li className="timeline-item">
+                <div className="timeline-date">Kasım 2024 – Halen</div>
+                <div className="timeline-content">
+                  <strong>Yarı Zamanlı Yazılım Geliştirici</strong>
+                  <span className="timeline-org">Prodrom ICT Solutions, Fırat Teknokent</span>
+                  <p>Şirketin yazılım geliştirme süreçlerine aktif olarak katılmaktayım.</p>
+                </div>
+              </li>
+              <li className="timeline-item timeline-item--active">
+                <div className="timeline-date">Ocak 2025 – Halen</div>
+                <div className="timeline-content">
+                  <strong>Eğitmen Mentor Bursiyeri</strong>
+                  <span className="timeline-org">Türkiye Teknoloji Takımı Vakfı (T3 Vakfı)</span>
+                  <p>Deneyap öğrencilerinin eğitimi ve mentörlüğü süreçlerinde görev almaktayım.</p>
+                </div>
+              </li>
+            </ol>
+          </article>
+
           <article aria-labelledby="teknolojiler-baslik">
             <h3 id="teknolojiler-baslik">Kullandığım Teknolojiler</h3>
             <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
               <li>HTML5</li><li>CSS3</li><li>Bootstrap</li><li>JavaScript</li><li>Laravel</li>
               <li>React</li><li>Web Services & API</li><li>C#</li><li>MySQL</li><li>PostgreSQL</li>
-              <li>jQuery</li><li>AJAX</li>
+              <li>jQuery</li><li>AJAX</li><li>TypeScript</li><li>Vite</li><li>Git / GitHub</li><li>SweetAlert2</li>
             </ul>
           </article>
         </section>
@@ -222,11 +293,11 @@ function App() {
         </section>
 
         <section id="iletisim" aria-labelledby="iletisim-baslik">
-          <h2 id="iletisim-baslik">İRTİBATA GEÇ</h2>
+          <h2 id="iletisim-baslik">İLETİŞİM</h2>
 
           <div className="contact-layout">
             <div className="contact-info">
-              <h3>İLETİŞİM!</h3>
+              
               <p>
                 Yeni bir proje, bir iş birliği fırsatı veya sadece teknoloji üzerine
                 sohbet etmek için aşağıdan bana ulaşabilirsiniz. İnovatif fikirlere
@@ -258,31 +329,32 @@ function App() {
             </div>
 
             <div className="contact-form-container">
-              <form className="contact-form" noValidate onSubmit={handleSubmit}>
+              <form className="contact-form" noValidate onSubmit={handleSubmit} ref={formRef}>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="full-name" className="sr-only">Adınız ve Soyadınız</label>
                     <input type="text" id="full-name" name="full-name" placeholder="Adınız ve Soyadınız" required minLength={3} />
-                    <small className="error-message" role="alert"></small>
                   </div>
                   <div className="form-group">
                     <label htmlFor="email" className="sr-only">Mail Adresiniz</label>
                     <input type="email" id="email" name="email" placeholder="Mail Adresiniz" required />
-                    <small className="error-message" role="alert"></small>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="subject" className="sr-only">Konu</label>
                   <input type="text" id="subject" name="subject" placeholder="Konu" required minLength={3} />
-                  <small className="error-message" role="alert"></small>
                 </div>
                 <div className="form-group">
                   <label htmlFor="message" className="sr-only">Mesajınız</label>
                   <textarea id="message" name="message" placeholder="Mesajınız" rows={6} required minLength={10}></textarea>
-                  <small className="error-message" role="alert"></small>
                 </div>
-                <button type="submit" className="submit-btn">
-                  MESAJ GÖNDER <span className="btn-arrow">→</span>
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={RECAPTCHA_SITE_KEY}
+                  theme="light"
+                />
+                <button type="submit" className="submit-btn" disabled={isSending}>
+                  {isSending ? 'GÖNDERİLİYOR...' : 'MESAJ GÖNDER'} <span className="btn-arrow">→</span>
                 </button>
               </form>
             </div>
