@@ -348,11 +348,13 @@ function App() {
                   <label htmlFor="message" className="sr-only">Mesajınız</label>
                   <textarea id="message" name="message" placeholder="Mesajınız" rows={6} required minLength={10}></textarea>
                 </div>
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  theme="light"
-                />
+                <div className="recaptcha-shell" aria-label="reCAPTCHA doğrulaması">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    theme="light"
+                  />
+                </div>
                 <button type="submit" className="submit-btn" disabled={isSending}>
                   {isSending ? 'GÖNDERİLİYOR...' : 'MESAJ GÖNDER'} <span className="btn-arrow">→</span>
                 </button>

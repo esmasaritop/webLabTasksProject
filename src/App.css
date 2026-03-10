@@ -613,6 +613,32 @@ section h2::after {
   transform: translateX(5px);
 }
 
+.recaptcha-shell {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+/* react-google-recaptcha container'ı: ölçeklemeyi bu elemana uygularız */
+.recaptcha-shell > div {
+  transform-origin: top left;
+}
+
+@media (max-width: 420px) {
+  .recaptcha-shell > div {
+    transform: scale(0.92);
+  }
+}
+
+@media (max-width: 360px) {
+  .recaptcha-shell > div {
+    transform: scale(0.85);
+  }
+}
+
 .btn-arrow {
   background-color: rgba(255, 255, 255, 0.1);
   width: 30px;
