@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { Code2, Github, Linkedin } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Code2, Github, Linkedin, Moon, Sun } from 'lucide-react'
 import './App.css'
 import Swal from 'sweetalert2'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -10,10 +10,22 @@ const RECAPTCHA_SITE_KEY = '6Lcw3YIsAAAAAIg5tIYDSjfag1G9aH7lA8-o73JP'
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') root.classList.add('dark');
+    else root.classList.remove('dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,6 +94,20 @@ function App() {
   return (
     <div className="app-container">
       <a href="#main-content" className="skip-link">İçeriğe Atla</a>
+      <button
+        type="button"
+        onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+        className="fixed top-4 right-4 z-[200] rounded-full bg-gray-200 p-2 text-gray-800 shadow-lg transition-transform hover:scale-110 dark:bg-gray-700 dark:text-gray-200"
+        aria-label={theme === 'dark' ? 'Açık temaya geç' : 'Karanlık temaya geç'}
+        title={theme === 'dark' ? 'Açık tema' : 'Karanlık tema'}
+      >
+        <span className="dark:hidden">
+          <Moon size={18} aria-hidden="true" />
+        </span>
+        <span className="hidden dark:inline">
+          <Sun size={18} aria-hidden="true" />
+        </span>
+      </button>
       {/*
         <div className="top-bar">
           <div className="top-bar-content">
@@ -352,7 +378,7 @@ function App() {
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     sitekey={RECAPTCHA_SITE_KEY}
-                    theme="light"
+                    theme={theme}
                   />
                 </div>
                 <button type="submit" className="submit-btn" disabled={isSending}>

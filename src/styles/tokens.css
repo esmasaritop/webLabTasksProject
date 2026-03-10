@@ -8,6 +8,7 @@
   --color-muted:     #667788;
   --color-surface:   #f8fafc;
   --color-border:    #e2e8f0;
+  --color-placeholder: #94a3b8;
   --color-error:     #ef4444;
   --color-success:   #28a745;
 
@@ -46,4 +47,24 @@
   /* --- Geçiş --- */
   --transition-fast:   150ms ease;
   --transition-normal: 300ms ease;
+}
+
+/* Dark tema: html elementine "dark" class'ı geldiğinde değişkenleri değiştir */
+.dark {
+  --color-bg: #0b1220;
+  --color-surface: #0f1a2b;
+  --color-text: #e5e7eb;
+  --color-muted: #9aa7b8;
+  --color-border: rgba(148, 163, 184, 0.22);
+  --color-placeholder: rgba(148, 163, 184, 0.75);
+
+  /* Marka renklerini dark temada biraz aç */
+  --color-primary: #cbd5e1;
+  --color-secondary: #e5e7eb;
+  --color-accent: #f3d36a;
+
+  /* Dark temada gölgeler daha yumuşak görünmeli */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 30px rgba(0, 0, 0, 0.55);
 }
